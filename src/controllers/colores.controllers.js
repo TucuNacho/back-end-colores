@@ -27,3 +27,15 @@ export const leerColor = async (req, res) => {
 };
 
 
+export const leerColorPorId = async (req, res) => {
+  try {
+    const buscarColor = await Color.findById(req.params.id);
+    if (!buscarColor) {
+      return res.status(404).json({ mensaje: "Color no encontrado" });
+    }
+    res.status(200).json(buscarColor);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al obtener color" });
+  }
+};
