@@ -34,7 +34,19 @@ export const borrarColor = async (req, res) => {
     }
     res.status(200).json({mensaje:"Color borrado con exito"})
   } catch (error) {
-    console.error(error)
-    res.status(500).json({mensaje:"Error al eliminar color"})
+      console.error(error)
+      res.status(500).json({mensaje:"Error al eliminar color"})
+    }
+}
+export const leerColorPorId = async (req, res) => {
+  try {
+    const buscarColor = await Color.findById(req.params.id);
+    if (!buscarColor) {
+      return res.status(404).json({ mensaje: "Color no encontrado" });
+    }
+    res.status(200).json(buscarColor);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al obtener color" });
   }
 };
