@@ -26,4 +26,15 @@ export const leerColor = async (req, res) => {
   }
 };
 
-
+export const borrarColor = async (req, res) => {
+  try {
+    const eliminarColor = await Color.findByIdAndDelete(req.params.id);
+    if (!eliminarColor) {
+      return res.status(404).json({ mensaje: "Color no encontrado" });
+    }
+    res.status(200).json({mensaje:"Color borrado con exito"})
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({mensaje:"Error al eliminar color"})
+  }
+};
