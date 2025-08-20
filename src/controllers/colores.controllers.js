@@ -16,3 +16,14 @@ export const crearColor = async (req, res) => {
 };
 
 
+export const leerColor = async (req, res) => {
+  try {
+    const listaColores = await Color.find();
+    res.status(200).json(listaColores);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al leer color" });
+  }
+};
+
+
