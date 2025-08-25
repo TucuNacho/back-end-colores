@@ -15,7 +15,6 @@ export const crearColor = async (req, res) => {
   }
 };
 
-
 export const leerColor = async (req, res) => {
   try {
     const listaColores = await Color.find();
@@ -32,12 +31,12 @@ export const borrarColor = async (req, res) => {
     if (!eliminarColor) {
       return res.status(404).json({ mensaje: "Color no encontrado" });
     }
-    res.status(200).json({mensaje:"Color borrado con exito"})
+    res.status(200).json({ mensaje: "Color borrado con exito" });
   } catch (error) {
-      console.error(error)
-      res.status(500).json({mensaje:"Error al eliminar color"})
-    }
-}
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al eliminar color" });
+  }
+};
 export const leerColorPorId = async (req, res) => {
   try {
     const buscarColor = await Color.findById(req.params.id);
@@ -48,5 +47,23 @@ export const leerColorPorId = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ mensaje: "Error al obtener color" });
+  }
+};
+
+export const editarColor = async (req, res) => {
+  try {
+    console.log("ID recibido:", req.params.id);
+    console.log("Body recibido:", req.body);
+
+    const colorEditado = await Color.findByIdAndUpdate(req.params.id, req.body);
+    if (!colorEditado) {
+      return res
+        .status(404)
+        .json({ mensaje: "Error al encontrar el color para editar" });
+    }
+    res.status(200).json({mensaje:"Color edita con exito"});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Error al encontrar el color" });
   }
 };
