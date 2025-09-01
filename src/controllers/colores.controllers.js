@@ -11,7 +11,7 @@ export const crearColor = async (req, res) => {
     res.status(201).json({ mensaje: "El color fue agregado correctamente" });
   } catch (error) {
     console.error(error);
-    res.status(501).json({ mensaje: "Error al agregar el color" });
+    res.status(500).json({ mensaje: "Error al agregar el color" });
   }
 };
 
